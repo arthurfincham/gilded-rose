@@ -12,6 +12,13 @@ class GildedRose
     item.sell_in -= 1
   end
 
+  def standard_update(item)
+    item.quality -= 2 if item.sell_in < 0
+    item.quality -= 1 if item.sell_in >= 0
+    item.sell_in -= 1 
+    quality_cap(item)
+  end
+
   def increase_quality(item)
     item.quality += 2 if item.quality < 50 && item.sell_in < 0
     item.quality += 1 if item.quality < 50 && item.sell_in >= 0
@@ -63,5 +70,12 @@ class GildedRose
     @items.each do |item|
       update_item(item)
     end
+  end
+
+  private
+
+  def quality_cap(item)
+    item.quality = 0 if item.quality < 0
+    item.quality = 50 if item.quality > 50
   end
 end

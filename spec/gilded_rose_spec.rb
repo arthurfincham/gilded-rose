@@ -3,10 +3,10 @@ require "mock_item"
 
 describe GildedRose do
   subject { described_class.new(MockItem.new("Standard Item", 3, 6)) }
-  describe ".update_days" do
+  describe ".standard_update" do
     it "reduces the days remaining for the item" do
       item = MockItem.new("Standard Item", 3, 6)
-      expect { subject.update_days(item) }.to change { item.sell_in }.by (-1)
+      expect { subject.standard_update(item) }.to change { item.sell_in }.by (-1)
     end
   end
 
@@ -27,25 +27,25 @@ describe GildedRose do
     end
   end
 
-  describe ".decrease_quality" do
+  describe ".standard_update" do
     it "reduces the quality of an item" do
       item = MockItem.new("Standard Item", 1, 5)
-      expect { subject.decrease_quality(item) }.to change { item.quality }.by (-1)
+      expect { subject.standard_update(item) }.to change { item.quality }.by (-1)
     end
 
     it "prevents item quality being negative" do
       item = MockItem.new("Standard Item", 1, 0)
-      expect { subject.decrease_quality(item) }.to change { item.quality }.by (0)
+      expect { subject.standard_update(item) }.to change { item.quality }.by (0)
     end
 
     it "decreases twice as fast if sell_in = 0" do
       item = MockItem.new("Standard Item", -1, 5)
-      expect { subject.decrease_quality(item) }.to change { item.quality }.by (-2)
+      expect { subject.standard_update(item) }.to change { item.quality }.by (-2)
     end
 
     it "negative sell_in does not make quality negative" do
       item = MockItem.new("Standard Item", -1, 1)
-      subject.decrease_quality(item)
+      subject.standard_update(item)
       expect(item.quality).to eq 0
     end
   end
