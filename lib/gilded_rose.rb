@@ -34,6 +34,12 @@ class GildedRose
     quality_cap(item)
   end
 
+  def cheese_update(item)
+    item.quality += 2 if item.sell_in < 0
+    item.quality += 1 if item.sell_in >= 0
+    quality_cap(item)
+  end
+
   def increase_quality(item)
     item.quality += 2 if item.quality < 50 && item.sell_in < 0
     item.quality += 1 if item.quality < 50 && item.sell_in >= 0
@@ -45,21 +51,10 @@ class GildedRose
     item.quality -= 2 if item.quality > 1 && item.sell_in < 0
   end
 
+  
+
   def conjured_quality(item)
     2.times { decrease_quality(item) }
-  end
-
-  def pass_quality(item)
-    case
-    when item.sell_in < 0
-      item.quality = 0
-    when item.sell_in <= 5
-      3.times { increase_quality(item) }
-    when item.sell_in <= 10
-      2.times { increase_quality(item) }
-    else
-      increase_quality(item)
-    end
   end
 
   def update_item(item)
@@ -67,8 +62,7 @@ class GildedRose
     when item.name.include?("Sulfuras")
       item
     when item.name.include?("Aged Brie")
-      update_days(item)
-      increase_quality(item)
+      cheese_update(item)
     when item.name.include?("Backstage passes")
       pass_update(item)
     when item.name.include?("Conjured")

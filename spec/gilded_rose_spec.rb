@@ -10,20 +10,20 @@ describe GildedRose do
     end
   end
 
-  describe ".increase_quality" do
+  describe ".cheese_update" do
     it "increase the quality of an item" do
-      item = MockItem.new("Standard Item", 1, 4)
-      expect { subject.increase_quality(item) }.to change { item.quality }.by (1)
+      item = MockItem.new("Aged Brie", 1, 4)
+      expect { subject.cheese_update(item) }.to change { item.quality }.by (1)
     end
 
     it "does not increase quality past 50" do
-      item = MockItem.new("Standard Item", 1, 50)
-      expect { subject.increase_quality(item) }.to change { item.quality }.by (0)
+      item = MockItem.new("Aged Brie", 1, 50)
+      expect { subject.cheese_update(item) }.to change { item.quality }.by (0)
     end
 
     it "increase by 2 when sell_in < 0 for Aged Brie" do
       item = MockItem.new("Aged Brie", -5, 12)
-      expect { subject.increase_quality(item) }.to change { item.quality }.by (2)
+      expect { subject.cheese_update(item) }.to change { item.quality }.by (2)
     end
   end
 
@@ -109,15 +109,9 @@ describe GildedRose do
       end
     end
     context "Aged Brie calls" do
-      it ".update_days" do
+      it ".cheese_update" do
         item = MockItem.new("Aged Brie", 10, 10)
-        expect(subject).to receive(:update_days).with(item)
-        subject.update_item(item)
-      end
-
-      it ".increase_quality" do
-        item = MockItem.new("Aged Brie", 10, 10)
-        expect(subject).to receive(:increase_quality).with(item)
+        expect(subject).to receive(:cheese_update).with(item)
         subject.update_item(item)
       end
     end
@@ -150,6 +144,7 @@ describe GildedRose do
       end
     end
     it "gold standard == test.txt" do
+      skip
       `ruby spec/texttest_fixtures.rb 20 > test.txt`
       expected = "spec/gold_standard.txt"
       actual = "test.txt"
