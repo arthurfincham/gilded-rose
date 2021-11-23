@@ -79,11 +79,4 @@ describe GildedRose do
     end
   end
 
-  # describe '.update_item' do
-  #   it 'updates the values' do
-  #     item = MockItem.new("Elixir", 5, 7)
-  #     subject.update_item(item)
-  #     expect(item.quality).to eq 6
-  #   end
-  # end
 end
