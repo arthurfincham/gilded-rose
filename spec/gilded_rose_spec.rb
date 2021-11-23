@@ -89,4 +89,75 @@ describe GildedRose do
       expect { subject.conjured_quality(item) }.to change { item.quality }.by (-4)
     end
   end
+
+  describe ".update_item" do
+    context "Sulfuras returns itself" do
+      it ".update_days it not called" do
+        item = MockItem.new("Sulfuras", 10, 10)
+        expect(subject).to_not receive(:update_days).with(item)
+        subject.update_item(item)
+      end
+
+      it '.decrease_quality is not called' do
+        item = MockItem.new("Sulfuras", 10, 10)
+        expect(subject).to_not receive(:decrease_quality).with(item)
+        subject.update_item(item)
+      end
+    end
+    context "Aged Brie calls" do
+      it ".update_days" do
+        item = MockItem.new("Aged Brie", 10, 10)
+        expect(subject).to receive(:update_days).with(item)
+        subject.update_item(item)
+      end
+
+      it '.increase_quality' do
+        item = MockItem.new("Aged Brie", 10, 10)
+        expect(subject).to receive(:increase_quality).with(item)
+        subject.update_item(item)
+      end
+    end
+
+    context "Backstage passes calls" do
+      it ".update_days" do
+        item = MockItem.new("Backstage passes", 10, 10)
+        expect(subject).to receive(:update_days).with(item)
+        subject.update_item(item)
+      end
+
+      it '.pass_quality' do
+        item = MockItem.new("Backstage passes", 10, 10)
+        expect(subject).to receive(:pass_quality).with(item)
+        subject.update_item(item)
+      end
+    end
+    context "Conjured calls" do
+      it ".update_days" do
+        item = MockItem.new("Conjured", 10, 10)
+        expect(subject).to receive(:update_days).with(item)
+        subject.update_item(item)
+      end
+
+      it '.conjured_quality' do
+        item = MockItem.new("Conjured", 10, 10)
+        expect(subject).to receive(:conjured_quality).with(item)
+        subject.update_item(item)
+      end
+    end
+    context "Normal Item calls" do
+      it ".update_days" do
+        item = MockItem.new("Banana", 10, 10)
+        expect(subject).to receive(:update_days).with(item)
+        subject.update_item(item)
+      end
+
+      it '.decrease_quality' do
+        item = MockItem.new("Banana", 10, 10)
+        expect(subject).to receive(:decrease_quality).with(item)
+        subject.update_item(item)
+      end
+    end
+
+    
+  end
 end
