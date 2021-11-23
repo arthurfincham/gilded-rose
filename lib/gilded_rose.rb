@@ -4,8 +4,8 @@ class GildedRose
 
   attr_accessor :items
 
-  def initialize
-    @items = []
+  def initialize(items)
+    @items = items
   end
 
   def update_days(item)
@@ -45,13 +45,13 @@ class GildedRose
     when item.name.include?("Backstage passes")
       update_days(item)
       pass_quality(item)
-    else
+    else 
       update_days(item)
       decrease_quality(item)
     end
   end
 
-  def update_quality
+  def update_quality()
     @items.each do |item|
       update_item(item)
     end

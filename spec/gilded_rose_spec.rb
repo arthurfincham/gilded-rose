@@ -2,7 +2,7 @@ require "gilded_rose"
 require "mock_item"
 
 describe GildedRose do
-  subject { described_class.new }
+  subject { described_class.new(MockItem.new("Cake", 3, 6)) }
 
   describe ".update_days" do
     it "reduces the days remaining for the item" do
@@ -77,6 +77,13 @@ describe GildedRose do
       item = MockItem.new("Backstage passes", 0, 20)
       expect { subject.pass_quality(item) }.to change {item.quality }.by (-20)
     end
-
   end
+
+  # describe '.update_item' do
+  #   it 'updates the values' do
+  #     item = MockItem.new("Elixir", 5, 7)
+  #     subject.update_item(item)
+  #     expect(item.quality).to eq 6
+  #   end
+  # end
 end
