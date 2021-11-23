@@ -3,7 +3,6 @@ require "mock_item"
 
 describe GildedRose do
   subject { described_class.new(MockItem.new("Cake", 3, 6)) }
-
   describe ".update_days" do
     it "reduces the days remaining for the item" do
       item = MockItem.new("Cake", 3, 6)
@@ -98,7 +97,7 @@ describe GildedRose do
         subject.update_item(item)
       end
 
-      it '.decrease_quality is not called' do
+      it ".decrease_quality is not called" do
         item = MockItem.new("Sulfuras", 10, 10)
         expect(subject).to_not receive(:decrease_quality).with(item)
         subject.update_item(item)
@@ -111,7 +110,7 @@ describe GildedRose do
         subject.update_item(item)
       end
 
-      it '.increase_quality' do
+      it ".increase_quality" do
         item = MockItem.new("Aged Brie", 10, 10)
         expect(subject).to receive(:increase_quality).with(item)
         subject.update_item(item)
@@ -125,7 +124,7 @@ describe GildedRose do
         subject.update_item(item)
       end
 
-      it '.pass_quality' do
+      it ".pass_quality" do
         item = MockItem.new("Backstage passes", 10, 10)
         expect(subject).to receive(:pass_quality).with(item)
         subject.update_item(item)
@@ -138,7 +137,7 @@ describe GildedRose do
         subject.update_item(item)
       end
 
-      it '.conjured_quality' do
+      it ".conjured_quality" do
         item = MockItem.new("Conjured", 10, 10)
         expect(subject).to receive(:conjured_quality).with(item)
         subject.update_item(item)
@@ -151,13 +150,11 @@ describe GildedRose do
         subject.update_item(item)
       end
 
-      it '.decrease_quality' do
+      it ".decrease_quality" do
         item = MockItem.new("Banana", 10, 10)
         expect(subject).to receive(:decrease_quality).with(item)
         subject.update_item(item)
       end
     end
-
-    
   end
 end
