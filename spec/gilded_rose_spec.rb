@@ -50,35 +50,35 @@ describe GildedRose do
     end
   end
 
-  describe ".pass_quality" do
+  describe ".pass_update" do
     it "increase quality by 1 if more than 10 days remain" do
       item = MockItem.new("Backstage passes", 12, 20)
-      expect { subject.pass_quality(item) }.to change { item.quality }.by (1)
+      expect { subject.pass_update(item) }.to change { item.quality }.by (1)
     end
 
     it "increase quality by 2 if 10 days remain" do
       item = MockItem.new("Backstage passes", 10, 20)
-      expect { subject.pass_quality(item) }.to change { item.quality }.by (2)
+      expect { subject.pass_update(item) }.to change { item.quality }.by (2)
     end
 
     it "increase quality by 2 if 7 days remain" do
       item = MockItem.new("Backstage passes", 7, 20)
-      expect { subject.pass_quality(item) }.to change { item.quality }.by (2)
+      expect { subject.pass_update(item) }.to change { item.quality }.by (2)
     end
 
     it "increase quality by 3 if 5 days remain" do
       item = MockItem.new("Backstage passes", 5, 20)
-      expect { subject.pass_quality(item) }.to change { item.quality }.by (3)
+      expect { subject.pass_update(item) }.to change { item.quality }.by (3)
     end
 
     it "increase quality by 3 if 2 days remain" do
       item = MockItem.new("Backstage passes", 2, 20)
-      expect { subject.pass_quality(item) }.to change { item.quality }.by (3)
+      expect { subject.pass_update(item) }.to change { item.quality }.by (3)
     end
 
     it "loses all quality after the event" do
       item = MockItem.new("Backstage passes", -1, 20)
-      expect { subject.pass_quality(item) }.to change { item.quality }.by (-20)
+      expect { subject.pass_update(item) }.to change { item.quality }.by (-20)
     end
   end
 
@@ -123,15 +123,9 @@ describe GildedRose do
     end
 
     context "Backstage passes calls" do
-      it ".update_days" do
+      it ".pass_update" do
         item = MockItem.new("Backstage passes", 10, 10)
-        expect(subject).to receive(:update_days).with(item)
-        subject.update_item(item)
-      end
-
-      it ".pass_quality" do
-        item = MockItem.new("Backstage passes", 10, 10)
-        expect(subject).to receive(:pass_quality).with(item)
+        expect(subject).to receive(:pass_update).with(item)
         subject.update_item(item)
       end
     end
@@ -148,16 +142,10 @@ describe GildedRose do
         subject.update_item(item)
       end
     end
-    context "Normal Item calls" do
-      it ".update_days" do
+    context "Standard Item calls" do
+      it ".standard_update" do
         item = MockItem.new("Normal Item", 10, 10)
-        expect(subject).to receive(:update_days).with(item)
-        subject.update_item(item)
-      end
-
-      it ".decrease_quality" do
-        item = MockItem.new("Normal Item", 10, 10)
-        expect(subject).to receive(:decrease_quality).with(item)
+        expect(subject).to receive(:standard_update).with(item)
         subject.update_item(item)
       end
     end

@@ -19,6 +19,21 @@ class GildedRose
     quality_cap(item)
   end
 
+  def pass_update(item)
+    case
+    when item.sell_in < 0
+      item.quality = 0
+    when item.sell_in <= 5
+      item.quality += 3
+    when item.sell_in <= 10
+      item.quality += 2
+    else
+      item.quality += 1
+    end
+    item.sell_in -= 1
+    quality_cap(item)
+  end
+
   def increase_quality(item)
     item.quality += 2 if item.quality < 50 && item.sell_in < 0
     item.quality += 1 if item.quality < 50 && item.sell_in >= 0
@@ -55,14 +70,12 @@ class GildedRose
       update_days(item)
       increase_quality(item)
     when item.name.include?("Backstage passes")
-      update_days(item)
-      pass_quality(item)
+      pass_update(item)
     when item.name.include?("Conjured")
       update_days(item)
       conjured_quality(item)
     else 
-      update_days(item)
-      decrease_quality(item)
+      standard_update(item)
     end
   end
 
