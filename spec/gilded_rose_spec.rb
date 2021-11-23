@@ -157,4 +157,15 @@ describe GildedRose do
       end
     end
   end
+
+describe "#update_quality" do
+  it "has no regression" do
+    `ruby spec/texttest_fixtures.rb 20 > test.txt`
+    expected = "spec/gold_standard.txt"
+    actual = "test.txt"
+
+    expect(IO.read(actual)).to eq IO.read(expected)
+    `rm test.txt`
+  end
+end
 end
