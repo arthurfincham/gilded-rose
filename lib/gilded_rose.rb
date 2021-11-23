@@ -49,6 +49,9 @@ class GildedRose
     when item.name.include?("Backstage passes")
       update_days(item)
       pass_quality(item)
+    when item.name.include?("Conjured")
+      update_days(item)
+      conjured_quality(item)
     else 
       update_days(item)
       decrease_quality(item)
