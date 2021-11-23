@@ -13,7 +13,8 @@ class GildedRose
   end
 
   def increase_quality(item)
-    item.quality += 1 if item.quality < 50
+    item.quality += 2 if item.quality < 50 && item.sell_in < 0
+    item.quality += 1 if item.quality < 50 && item.sell_in >= 0
   end
 
   def decrease_quality(item)
@@ -28,7 +29,7 @@ class GildedRose
 
   def pass_quality(item)
     case
-    when item.sell_in <= 0
+    when item.sell_in < 0
       item.quality = 0
     when item.sell_in <= 5
       3.times { increase_quality(item) }

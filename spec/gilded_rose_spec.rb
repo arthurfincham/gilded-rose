@@ -20,6 +20,11 @@ describe GildedRose do
       item = MockItem.new("Chair", 1, 50)
       expect { subject.increase_quality(item) }.to change { item.quality }.by (0)
     end
+
+    it "increase by 2 when sell_in < 0 for Aged Brie" do
+      item = MockItem.new("Aged Brie", -5, 12)
+      expect { subject.increase_quality(item) }.to change { item.quality }.by (2)
+    end
   end
 
   describe ".decrease_quality" do
@@ -72,7 +77,7 @@ describe GildedRose do
     end
 
     it "loses all quality after the event" do
-      item = MockItem.new("Backstage passes", 0, 20)
+      item = MockItem.new("Backstage passes", -1, 20)
       expect { subject.pass_quality(item) }.to change { item.quality }.by (-20)
     end
   end
@@ -88,6 +93,8 @@ describe GildedRose do
       expect { subject.conjured_quality(item) }.to change { item.quality }.by (-4)
     end
   end
+
+  
 
   describe ".update_item" do
     context "Sulfuras returns itself" do
