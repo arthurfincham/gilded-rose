@@ -82,30 +82,18 @@ describe GildedRose do
     end
   end
 
-  describe ".conjured_quality" do
+  describe ".conjured_update" do
     it "decreases quality by 2" do
       item = MockItem.new("Conjured", 10, 10)
-      expect { subject.conjured_quality(item) }.to change { item.quality }.by (-2)
-    end
-
-    it "decreases quality by 4 if sell_in < 0" do
-      item = MockItem.new("Conjured", -1, 10)
-      expect { subject.conjured_quality(item) }.to change { item.quality }.by (-4)
+      expect { subject.conjured_update(item) }.to change { item.quality }.by (-2)
     end
   end
 
   describe ".update_item" do
-    context "Sulfuras returns itself" do
-      it ".update_days it not called" do
+    context "Sulfuras" do
+      it "returns itself" do
         item = MockItem.new("Sulfuras", 10, 10)
-        expect(subject).to_not receive(:update_days).with(item)
-        subject.update_item(item)
-      end
-
-      it ".decrease_quality is not called" do
-        item = MockItem.new("Sulfuras", 10, 10)
-        expect(subject).to_not receive(:decrease_quality).with(item)
-        subject.update_item(item)
+        expect(subject.update_item(item)).to eq(item)
       end
     end
     context "Aged Brie calls" do
@@ -124,15 +112,9 @@ describe GildedRose do
       end
     end
     context "Conjured calls" do
-      it ".update_days" do
+      it ".conjured_update" do
         item = MockItem.new("Conjured", 10, 10)
-        expect(subject).to receive(:update_days).with(item)
-        subject.update_item(item)
-      end
-
-      it ".conjured_quality" do
-        item = MockItem.new("Conjured", 10, 10)
-        expect(subject).to receive(:conjured_quality).with(item)
+        expect(subject).to receive(:conjured_update).with(item)
         subject.update_item(item)
       end
     end
@@ -144,7 +126,6 @@ describe GildedRose do
       end
     end
     it "gold standard == test.txt" do
-      skip
       `ruby spec/texttest_fixtures.rb 20 > test.txt`
       expected = "spec/gold_standard.txt"
       actual = "test.txt"
