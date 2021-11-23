@@ -22,6 +22,10 @@ class GildedRose
     item.quality -= 2 if item.quality > 1 && item.sell_in < 0
   end
 
+  def conjured_quality(item)
+    2.times { decrease_quality(item) }
+  end
+
   def pass_quality(item)
     case
     when item.sell_in <= 0
