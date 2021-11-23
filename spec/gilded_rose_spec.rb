@@ -69,6 +69,11 @@ describe GildedRose do
   end
 
   describe '.pass_quality' do
+    it 'increase quality by 1 if more than 10 days remain' do
+      item = MockItem.new("Backstage passes", 12, 20)
+      expect { subject.pass_quality(item) }.to change { item.quality }.by (1)
+    end
+
     it 'increase quality by 2 if 10 days remain' do
       item = MockItem.new("Backstage passes", 10, 20)
       expect { subject.pass_quality(item) }.to change { item.quality }.by (2)

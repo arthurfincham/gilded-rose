@@ -31,6 +31,19 @@ class GildedRose
     item.quality -= 2 if item.quality > 1 && item.sell_in < 0
   end
 
+  def pass_quality(item)
+    case
+    when item.sell_in <= 0
+      item.quality = 0
+    when item.sell_in <= 5
+      item.quality += 3
+    when item.sell_in <= 10
+      item.quality += 2
+    else
+      item.quality += 1
+    end
+  end
+
   def update_item(item)
     unless special_item?(item)
       update_days(item)
