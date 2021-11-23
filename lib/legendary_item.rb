@@ -1,4 +1,4 @@
-require 'standard_item'
+require "./lib/standard_item"
 
 class LegendaryItem < StandardItem
   def update; end
