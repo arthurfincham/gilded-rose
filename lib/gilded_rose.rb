@@ -14,11 +14,7 @@ class GildedRose
 
   def special_item?(item)
     case
-    when item.name.include?("Sulfuras")
-      true
-    when item.name.include?("Aged Brie")
-      true
-    when item.name.include?("Backstage passes")
+    when item.name.include?("Sulfuras") || item.name.include?("Aged Brie") || item.name.include?("Backstage passes")
       true
     else
       false
