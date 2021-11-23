@@ -44,4 +44,16 @@ describe GildedRose do
       expect { subject.increase_quality(item) }.to change { item.quality }.by (0)
     end
   end
+
+  describe ".decrease_quality" do
+    it 'reduces the quality of an item' do
+      item = MockItem.new("Chair", 1, 5)
+      expect{subject.decrease_quality(item)}.to change {item.quality }.by (-1)
+    end
+
+    it 'prevents item quality being negative' do
+      item = MockItem.new("Chair", 1, 0)
+      expect{subject.decrease_quality(item) }.to change { item.quality }.by (0)
+    end
+  end
 end
