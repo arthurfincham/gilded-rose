@@ -2,8 +2,27 @@ require './lib/item'
 
 class GildedRose
 
-  def initialize(items)
-    @items = items
+  attr_accessor :items
+
+  def initialize
+    @items = []
+  end
+
+  def update_days(item)
+    item.sell_in -= 1
+  end
+
+  def special_item?(item)
+    case
+    when item.name.include?("Sulfuras")
+      true
+    when item.name.include?("Aged Brie")
+      true
+    when item.name.include?("Backstage passes")
+      true
+    else
+      false
+    end
   end
 
   def update_quality()
