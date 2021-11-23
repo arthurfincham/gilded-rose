@@ -67,19 +67,4 @@ describe GildedRose do
       expect(item.quality).to eq 0
     end
   end
-
-  describe '.update_item' do
-    context 'a normal item' do
-      before do
-        @item = MockItem.new("Cake", 3, 6)
-      end
-      it 'reduces the quality by -1' do
-        expect {subject.update_item(@item)}.to change { @item.quality }.by (-1)
-      end
-
-      it 'reduces the sell_in by -1' do
-        expect {subject.update_item(@item)}.to change { @item.quality }.by (-1)
-      end 
-    end
-  end
 end
