@@ -60,5 +60,11 @@ describe GildedRose do
       item = MockItem.new("Chair", -1, 5)
       expect { subject.decrease_quality(item) }.to change { item.quality }.by (-2)
     end
+
+    it 'negative sell_in does not make quality negative' do
+      item = MockItem.new("Chair", -1, 1)
+      subject.decrease_quality(item)
+      expect(item.quality).to eq 0
+    end
   end
 end
