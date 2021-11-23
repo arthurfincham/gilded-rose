@@ -55,5 +55,10 @@ describe GildedRose do
       item = MockItem.new("Chair", 1, 0)
       expect{subject.decrease_quality(item) }.to change { item.quality }.by (0)
     end
+
+    it 'decreases twice as fast if sell_in = 0' do
+      item = MockItem.new("Chair", -1, 5)
+      expect { subject.decrease_quality(item) }.to change { item.quality }.by (-2)
+    end
   end
 end
