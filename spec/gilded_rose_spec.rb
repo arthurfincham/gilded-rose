@@ -32,4 +32,16 @@ describe GildedRose do
       expect(subject.special_item?(item)).to be false
     end
   end
+
+  describe ".increase_quality" do
+    it 'increase the quality of an item' do
+      item = MockItem.new("Chair", 1, 4)
+      expect{subject.increase_quality(item)}.to change { item.quality }.by (1)
+    end
+
+    it 'does not increase quality past 50' do
+      item = MockItem.new("Chair", 1, 50)
+      expect { subject.increase_quality(item) }.to change { item.quality }.by (0)
+    end
+  end
 end
