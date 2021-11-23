@@ -22,7 +22,7 @@ class GildedRose
       when item.name.include?("Backstage passes")
         BackstagePass.new(item).update
       when item.name.include?("Conjured")
-        LegendaryItem.new(item).update
+        ConjuredItem.new(item).update
       else
         StandardItem.new(item).update
       end
