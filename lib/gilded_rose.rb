@@ -9,24 +9,24 @@ class GildedRose
   attr_accessor :items
 
   def initialize(items)
-    @items = items.map { |item| item_class(item).new(item) }
+    @items = items.map { |item| item_class(item.name).new(item) }
   end
 
-  def update_quality()
+  def update_quality
     @items.each do |item|
       item.update
     end
   end
 
-  def item_class(item)
+  def item_class(name)
     case
-      when item.name.include?("Sulfuras")
+      when name.include?("Sulfuras")
         LegendaryItem
-      when item.name.include?("Aged Brie")
+      when name.include?("Aged Brie")
         AgedBrie
-      when item.name.include?("Backstage passes")
+      when name.include?("Backstage passes")
         BackstagePass
-      when item.name.include?("Conjured")
+      when name.include?("Conjured")
         ConjuredItem
       else
         StandardItem
