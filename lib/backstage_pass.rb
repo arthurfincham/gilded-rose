@@ -1,6 +1,6 @@
-require "./lib/standard_item"
-class BackstagePass < StandardItem
+require './lib/standard_item'
 
+class BackstagePass < StandardItem
   def update
     case
     when item.sell_in <= 0
@@ -15,5 +15,4 @@ class BackstagePass < StandardItem
     item.sell_in -= 1
     quality_cap(item)
   end
-
 end
