@@ -1,4 +1,4 @@
-require "./lib/standard_item"
+require './lib/standard_item'
 
 class ConjuredItem < StandardItem
   def update
